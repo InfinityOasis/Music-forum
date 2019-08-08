@@ -3,7 +3,7 @@ $(document).ready(function(){
     var collection;
     var ifColl=0;//这篇文章是否被该用户收藏？全局
     var textid = null;
-    var thistext = 51;
+    var thistext = 1;
     function left(depth){  //printComments函数会用到
         var leftComm=50;
         for(var i=0;i<depth;i++){
@@ -346,7 +346,7 @@ $(document).ready(function(){
         like++;
         $("#article-like").html("喜欢"+like);
         $.ajax({
-            url:"http://172.20.151.112:8066/Music_forum/like",
+            url:"http://localhost:8066/Music_forum/like",
             type:"POST",
             datatype:"json",
             data:{
