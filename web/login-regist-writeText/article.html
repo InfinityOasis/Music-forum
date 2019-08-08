@@ -74,25 +74,25 @@
             </div>
             <ul id="nav">
                 <div class="one-nav">
-                    <li class="current-nav"><a href="" id="current-a" class="nav">HOME<div class="wee grad"></div></a>
+                    <li class="current-nav"><a href="http://localhost:8066/Music_forum/login-regist-writeText/home.html" id="current-a" class="nav">HOME<div class="wee grad"></div></a>
                     </li>
                 </div>
                 <div class="one-nav">
-                    <li><a class="nav" href="">排行榜</a></li>
+                    <li><a class="nav" href="http://localhost:8066/Music_forum/login-regist-writeText/rankingList.html">排行榜</a></li>
                 </div>
                 <div class="one-nav">
-                    <li><a class="nav" href="">乐评</a></li>
+                    <li><a class="nav" href="http://localhost:8066/Music_forum/login-regist-writeText/discuss.html">乐评</a></li>
                 </div>
                 <div class="one-nav">
-                    <li><a class="nav" href="">唱片小店</a></li>
+                    <li><a class="nav" href="http://localhost:8066/Music_forum/login-regist-writeText/Shop.html">唱片小店</a></li>
                 </div>
             </ul>
             <div id="login">
-                <li src="" id="in" class="login"><a href="enter.html">Sign In</a></li>
-                <li src="" id="up" class="login"><a href="login.html">Sign Up</a></li>
+                <li src="" id="in" class="login"><a href="http://localhost:8066/Music_forum/login-regist-writeText/enter.html">Sign In</a></li>
+                <li src="" id="up" class="login"><a href="http://localhost:8066/Music_forum/login-regist-writeText/login.html">Sign Up</a></li>
             </div>
             <div class="loginOn">
-                <div id="loginOn-avatar"><img src="img/article/avatar-default.jpg" width="100px"></div>
+                <div id="loginOn-avatar"><img src="img/article/avatar-default.jpg" width="100%" height="100%" id="loginOn-image"></div>
                 <div id="loginOn-name">小明_111</div>
             </div>
 
@@ -101,12 +101,12 @@
 
             <nav class="phone-nav">
                 <ul>
-                    <li><a href="#">HOME</a></li>
-                    <li><a href="#">排行榜</a></li>
-                    <li><a href="#">乐 评</a></li>
-                    <li><a href="#">唱片店</a></li>
-                    <li><a href="#">- 登录</a></li>
-                    <li><a href="#">- 注册</a></li>
+                    <li><a href="http://localhost:8066/Music_forum/login-regist-writeText/home.html">HOME</a></li>
+                    <li><a href="http://localhost:8066/Music_forum/login-regist-writeText/rankingList.html">排行榜</a></li>
+                    <li><a href="http://localhost:8066/Music_forum/login-regist-writeText/discuss.html">乐 评</a></li>
+                    <li><a href="http://localhost:8066/Music_forum/login-regist-writeText/Shop.html">唱片店</a></li>
+                    <li><a href="http://localhost:8066/Music_forum/login-regist-writeText/enter.html">- 登录</a></li>
+                    <li><a href="http://localhost:8066/Music_forum/login-regist-writeText/login.html">- 注册</a></li>
                 </ul>
             </nav>
             <div class="nav-toggle">
@@ -116,18 +116,28 @@
 
         <div class="enter-head"></div>
         <div id="main-content">
+            <img src="img/artList/textdefalut.png" id="textimage">
             <div id="article-title" class="grad">515音乐论坛-515</div>
             <div id="author">
                 <div class="avatar"><img src="img/article/avatar-default.jpg" width="50px"></div>
                 <p id="author-username">小明_1234</p>
                 <p id="author-time">发表于</p>
             </div>
-            <article id="article-content">欢迎来到515音乐论坛</article>
-            <div id="article-like">喜欢</div>
-            <div id="arti-collections">收藏</div>
-            <div id="article-conmmet-title">评论</div>
-            <textarea id="article-writeComment" placeholder="善意的评论是友好交流的开始"></textarea>
-            <button id="commit-comment">发送</button>
+            <article id="article-content">欢迎来到515<br><br>音<br>乐论15<br><br>音<br>乐15<br><br>音<br>乐15<br><br>音<br>乐坛</article>
+            <!-- 发射爱心 -->
+            
+            <div id="feedback">
+                    <div class="love"></div>
+                    <button id="arti-collections">收藏</button>
+                    <button id="article-like">喜欢</button>
+                    <button id="article-conmmet-title">评论</button>
+            </div>
+            
+            <div id="writecomment">
+                    <textarea id="article-writeComment" placeholder="善意的评论是友好交流的开始"></textarea>
+                    <button id="commit-comment">发送</button>
+            </div>
+            
 
             <div id="allComments">
 
@@ -150,7 +160,7 @@
                 class="icon icon--cross">
                 <use xlink:href="#icon-cross"></use>
             </svg></button>
-        <form class="search__form" action="">
+        <form class="search__form" action=""  onsubmit="return false">
             <input class="search__input" name="search" type="search" placeholder="Search" autocomplete="off"
                 autocorrect="off" autocapitalize="off" spellcheck="false" />
             <span class="search__info">Hey！需要一些推荐吗？</span>
