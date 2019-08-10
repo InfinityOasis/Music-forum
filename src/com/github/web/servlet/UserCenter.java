@@ -39,18 +39,20 @@ public class UserCenter extends HttpServlet {
         //获取session数据
 
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("usermsg");
 
-        System.out.println("个人中心session 的 userid : " + user.getUserid());
+        User user = (User) session.getAttribute("usermsg");
+        User auser = null;
+        if (user != null) {
+            System.out.println("个人中心session 的 userid : " + user.getUserid());
+            auser = userService.getUserByUserID(user.getUserid());
+            session.setAttribute("usermsg", auser);
+        }
+
 
         //接收userid
 
         String auserid = (String) session.getAttribute("auserid");
-        //String userid = request.getParameter("userid");
-       //String userid = "2464792469@qq.com";
-//        System.out.println(userid+"---------------------------");
 
-        //获取发过的 text 和 comment
 
         List<simpletext> listArtical = textService.getsimpleTextByUserID(auserid);
         List<simpletext> listCollection = textService.getcollectionByUserID(auserid);
@@ -58,6 +60,8 @@ public class UserCenter extends HttpServlet {
         //查询user信息
         System.out.println("个人中心 接收的 userid"+auserid);
         User userByUserID = userService.getUserByUserID(auserid);
+        System.out.println("通过个人中心接受的userid查询到的user对象是：" + userByUserID);
+
 
         //用于传递list集合，将list集合再放入一个json中传给前端
 
@@ -69,10 +73,9 @@ public class UserCenter extends HttpServlet {
 
         if (user != null) {
             if (auserid.equals(user.getUserid())) {
-
                 //判断是否为自己的主页
                 isself = "true";
-                map.put("user", user);
+                map.put("user", auser);
 
             } else {
 
@@ -80,11 +83,9 @@ public class UserCenter extends HttpServlet {
                 isself = "false";
 
                 // 根据userid查询数据
-
                 map.put("user", userByUserID);
 
                 //判断关注情况
-
                 follow follow = new follow();
                 follow.setUserid(user.getUserid());
                 follow.setFollowed(auserid);
@@ -101,9 +102,9 @@ public class UserCenter extends HttpServlet {
             map.put("isself", isself);
             map.put("isfollow", isfollow);
             map.put("follownum", follownum);
-            map.put("username", user.getUsername());
-            map.put("userid", user.getUserid());
-            map.put("imageid", user.getImageid());
+            map.put("username", auser.getUsername());
+            map.put("userid", auser.getUserid());
+            map.put("imageid", auser.getImageid());
             String s = JSON.toJSONString(map);
             System.out.println(s);
             ObjectMapper mapper = new ObjectMapper();
@@ -114,6 +115,18 @@ public class UserCenter extends HttpServlet {
 //            response.setContentType("text/html;charset=utf-8");
 //            PrintWriter out = response.getWriter();
 //            out.print("<script language='javascript'>alert('登录已失效请重新登陆');window.location.href='http://172.20.151.117:8066/Music_forum/login-regist-writeText/enter.html';</script>");
+            isself = "false";
+            map.put("isself", isself);
+            map.put("isfollow", isfollow);
+            map.put("listArticle", listArtical);
+            map.put("listCollection", listCollection);
+            map.put("follownum", follownum);
+            map.put("user", userByUserID);
+            String s = JSON.toJSONString(map);
+            System.out.println(s);
+            ObjectMapper mapper = new ObjectMapper();
+            mapper.writeValue(response.getWriter(), map);
+
         }
 
     }

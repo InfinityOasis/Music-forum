@@ -1,10 +1,12 @@
 jQuery(document).ready(function($){
+    var yours=false;
     $.ajax({
         url:"http://localhost:8066/Music_forum/getUserIformation",
         type:"GET",
         dataType:"json",
         success:function (data) {
             if(data!=null){
+                yours=true;
                 //userid不为空 获取用户头像 用户昵称 id
                 $("#login").css("display","none");
                 $(".loginOn").css("display","block");
@@ -106,6 +108,22 @@ jQuery(document).ready(function($){
         error:function(jqXHR){
             alert("OOPS! 服务器出现了一个小问题："+jqXHR.status);
         }
+    })
+
+    $("#plus").click(function(){
+        if(yours){
+            location.href = 'http://localhost:8066/Music_forum/login-regist-writeText/write.html';
+        }else{
+            if(confirm("您还未登录,不能创作,是否前往登录?")){
+                window.location.href="http://localhost:8066/Music_forum/login-regist-writeText/enter.html"
+            }
+        }
+
+    })
+    $("#plus").hover(function(){
+        $("#plustip").fadeIn()
+    },function(){
+        $("#plustip").fadeOut()
     })
 
 

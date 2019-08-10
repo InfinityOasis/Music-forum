@@ -10,6 +10,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.domain.User;
 import com.github.service.UserService;
 import com.github.service.impl.UserServiceImpl;
+import com.github.util.toMD5;
 import org.apache.commons.beanutils.BeanUtils;
 
 import javax.servlet.ServletException;
@@ -39,11 +40,15 @@ public class signin extends HttpServlet {
         } catch (InvocationTargetException e) {
             e.printStackTrace();
         }
-        System.out.println(user.toString());
+        //System.out.println(user.toString());
         //验证用户名密码是否匹配
         UserService userService = new UserServiceImpl();
         Boolean have = userService.isHave(user);
-        System.out.println("have = "+have);
+        //System.out.println("have = "+have);
+        String password = user.getPassword();
+        String s1 = toMD5.MD5(password);
+        String s2 = toMD5.MD5(s1);
+        user.setPassword(s2);
         User signin = userService.signin(user);
         //设置响应的数据格式为json
         response.setContentType("application/json;charset=utf-8");
@@ -56,7 +61,7 @@ public class signin extends HttpServlet {
             //1.获取session
             HttpSession session = request.getSession();
             //2.存储数据
-            session.setAttribute("usermsg", userService.getUserByUserID(user.getUserid()) );
+            session.setAttribute("usermsg", userService.getUserByUserID(user.getUserid()));
 //            User user1 = (User) session.getAttribute("usermsg");
 //            System.out.println(user1);
         }else {
@@ -65,8 +70,8 @@ public class signin extends HttpServlet {
             map1.put("password", user.getPassword());
         }
         //将map转为json
-        String s = JSON.toJSONString(map1);
-        System.out.println(s);
+        //String s = JSON.toJSONString(map1);
+        //System.out.println(s);
         ObjectMapper mapper = new ObjectMapper();
         //传递给客户端
         mapper.writeValue(response.getWriter(), map1);

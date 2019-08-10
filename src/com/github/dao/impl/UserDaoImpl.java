@@ -29,8 +29,8 @@ public class UserDaoImpl implements UserDao {
     private JdbcTemplate template = new JdbcTemplate(JDBCUtils.getDataSource());
     @Override
     public void register(User users) {
-        String sql = "insert into user values(?, ?, ?, 1, ?, ?, ?, ?)";
-        template.update(sql, users.getUserid(), users.getUsername(), users.getPassword(), users.getNumsignin(), users.getFans(), users.getDescription(), users.getSex());
+        String sql = "insert into user values(?, ?, ?, ?, ?, ?, ?, ?)";
+        template.update(sql, users.getUserid(), users.getUsername(), users.getPassword(), users.getNumsignin(), users.getFans(), users.getDescription(), users.getSex(), users.getImageid());
     }
 
     /**
@@ -190,6 +190,23 @@ public class UserDaoImpl implements UserDao {
             e.printStackTrace();
             System.out.println("语法错误,请更正");
             return 0;
+        }
+    }
+
+    @Override
+    public Boolean changeUserimage(String url, String userid) {
+        try {
+            String sql = "update user set imageid = ? where userid = ?";
+            int update = template.update(sql, url, userid);
+            if (update == 1){
+                return true;
+            }else {
+                return false;
+            }
+        }catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("更换头像异常！！！！");
+            return false;
         }
     }
 }
